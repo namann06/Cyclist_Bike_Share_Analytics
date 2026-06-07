@@ -1,0 +1,17 @@
+# Data files
+cyclistic_clean_data.csv
+cyclistic_trips.db
+
+# SQLite database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE configurations
+.vscode/
+.idea/
