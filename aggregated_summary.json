@@ -1,0 +1,504 @@
+{
+    "user_type_totals": [
+        {
+            "member_casual": "casual",
+            "total_rides": 67692,
+            "percentage": 8.63
+        },
+        {
+            "member_casual": "member",
+            "total_rides": 716593,
+            "percentage": 91.37
+        }
+    ],
+    "ride_length_stats": [
+        {
+            "member_casual": "casual",
+            "min_ride_length_min": 1.02,
+            "max_ride_length_min": 177200.37,
+            "avg_ride_length_min": 89.79
+        },
+        {
+            "member_casual": "member",
+            "min_ride_length_min": 1.0,
+            "max_ride_length_min": 101607.13,
+            "avg_ride_length_min": 13.32
+        }
+    ],
+    "weekly_activity": [
+        {
+            "member_casual": "casual",
+            "day_of_week": 1,
+            "total_rides": 18586,
+            "avg_ride_length_min": 84.65
+        },
+        {
+            "member_casual": "casual",
+            "day_of_week": 2,
+            "total_rides": 5580,
+            "avg_ride_length_min": 79.36
+        },
+        {
+            "member_casual": "casual",
+            "day_of_week": 3,
+            "total_rides": 7289,
+            "avg_ride_length_min": 76.26
+        },
+        {
+            "member_casual": "casual",
+            "day_of_week": 4,
+            "total_rides": 7658,
+            "avg_ride_length_min": 74.98
+        },
+        {
+            "member_casual": "casual",
+            "day_of_week": 5,
+            "total_rides": 7127,
+            "avg_ride_length_min": 141.26
+        },
+        {
+            "member_casual": "casual",
+            "day_of_week": 6,
+            "total_rides": 7996,
+            "avg_ride_length_min": 101.73
+        },
+        {
+            "member_casual": "casual",
+            "day_of_week": 7,
+            "total_rides": 13456,
+            "avg_ride_length_min": 82.62
+        },
+        {
+            "member_casual": "member",
+            "day_of_week": 1,
+            "total_rides": 59716,
+            "avg_ride_length_min": 16.34
+        },
+        {
+            "member_casual": "member",
+            "day_of_week": 2,
+            "total_rides": 109873,
+            "avg_ride_length_min": 13.77
+        },
+        {
+            "member_casual": "member",
+            "day_of_week": 3,
+            "total_rides": 127391,
+            "avg_ride_length_min": 12.88
+        },
+        {
+            "member_casual": "member",
+            "day_of_week": 4,
+            "total_rides": 121326,
+            "avg_ride_length_min": 11.92
+        },
+        {
+            "member_casual": "member",
+            "day_of_week": 5,
+            "total_rides": 124598,
+            "avg_ride_length_min": 11.84
+        },
+        {
+            "member_casual": "member",
+            "day_of_week": 6,
+            "total_rides": 114624,
+            "avg_ride_length_min": 13.34
+        },
+        {
+            "member_casual": "member",
+            "day_of_week": 7,
+            "total_rides": 59065,
+            "avg_ride_length_min": 16.33
+        }
+    ],
+    "hourly_activity": [
+        {
+            "member_casual": "casual",
+            "hour_of_day": 0,
+            "total_rides": 465
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 1,
+            "total_rides": 331
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 2,
+            "total_rides": 248
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 3,
+            "total_rides": 145
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 4,
+            "total_rides": 95
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 5,
+            "total_rides": 196
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 6,
+            "total_rides": 471
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 7,
+            "total_rides": 1010
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 8,
+            "total_rides": 1832
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 9,
+            "total_rides": 1869
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 10,
+            "total_rides": 2788
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 11,
+            "total_rides": 4242
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 12,
+            "total_rides": 5620
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 13,
+            "total_rides": 7158
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 14,
+            "total_rides": 7682
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 15,
+            "total_rides": 7802
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 16,
+            "total_rides": 7608
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 17,
+            "total_rides": 6988
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 18,
+            "total_rides": 4261
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 19,
+            "total_rides": 2469
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 20,
+            "total_rides": 1532
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 21,
+            "total_rides": 1297
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 22,
+            "total_rides": 937
+        },
+        {
+            "member_casual": "casual",
+            "hour_of_day": 23,
+            "total_rides": 646
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 0,
+            "total_rides": 2938
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 1,
+            "total_rides": 1728
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 2,
+            "total_rides": 1125
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 3,
+            "total_rides": 890
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 4,
+            "total_rides": 1981
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 5,
+            "total_rides": 9011
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 6,
+            "total_rides": 27621
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 7,
+            "total_rides": 58364
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 8,
+            "total_rides": 78362
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 9,
+            "total_rides": 35803
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 10,
+            "total_rides": 24127
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 11,
+            "total_rides": 29133
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 12,
+            "total_rides": 33346
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 13,
+            "total_rides": 32846
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 14,
+            "total_rides": 32003
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 15,
+            "total_rides": 42748
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 16,
+            "total_rides": 75937
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 17,
+            "total_rides": 95381
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 18,
+            "total_rides": 55269
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 19,
+            "total_rides": 32389
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 20,
+            "total_rides": 19122
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 21,
+            "total_rides": 13556
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 22,
+            "total_rides": 8248
+        },
+        {
+            "member_casual": "member",
+            "hour_of_day": 23,
+            "total_rides": 4665
+        }
+    ],
+    "rideable_types": [
+        {
+            "member_casual": "casual",
+            "rideable_type": "docked_bike",
+            "total_rides": 67692,
+            "percentage": 100.0
+        },
+        {
+            "member_casual": "member",
+            "rideable_type": "docked_bike",
+            "total_rides": 716593,
+            "percentage": 100.0
+        }
+    ],
+    "top_casual_stations": [
+        {
+            "start_station_name": "Streeter Dr & Grand Ave",
+            "ride_count": 2741
+        },
+        {
+            "start_station_name": "Lake Shore Dr & Monroe St",
+            "ride_count": 2731
+        },
+        {
+            "start_station_name": "Shedd Aquarium",
+            "ride_count": 1829
+        },
+        {
+            "start_station_name": "Millennium Park",
+            "ride_count": 1404
+        },
+        {
+            "start_station_name": "Michigan Ave & Oak St",
+            "ride_count": 1015
+        },
+        {
+            "start_station_name": "Michigan Ave & Washington St",
+            "ride_count": 838
+        },
+        {
+            "start_station_name": "Dusable Harbor",
+            "ride_count": 832
+        },
+        {
+            "start_station_name": "Adler Planetarium",
+            "ride_count": 825
+        },
+        {
+            "start_station_name": "Theater on the Lake",
+            "ride_count": 793
+        },
+        {
+            "start_station_name": "Lake Shore Dr & North Blvd",
+            "ride_count": 603
+        }
+    ],
+    "top_member_stations": [
+        {
+            "start_station_name": "Canal St & Adams St",
+            "ride_count": 13754
+        },
+        {
+            "start_station_name": "Clinton St & Washington Blvd",
+            "ride_count": 13392
+        },
+        {
+            "start_station_name": "Clinton St & Madison St",
+            "ride_count": 12838
+        },
+        {
+            "start_station_name": "Kingsbury St & Kinzie St",
+            "ride_count": 8687
+        },
+        {
+            "start_station_name": "Columbus Dr & Randolph St",
+            "ride_count": 8467
+        },
+        {
+            "start_station_name": "Canal St & Madison St",
+            "ride_count": 7861
+        },
+        {
+            "start_station_name": "Franklin St & Monroe St",
+            "ride_count": 6973
+        },
+        {
+            "start_station_name": "Michigan Ave & Washington St",
+            "ride_count": 6673
+        },
+        {
+            "start_station_name": "Larrabee St & Kingsbury St",
+            "ride_count": 6443
+        },
+        {
+            "start_station_name": "Clinton St & Lake St",
+            "ride_count": 6420
+        }
+    ],
+    "monthly_activity": [
+        {
+            "member_casual": "casual",
+            "month": 1,
+            "total_rides": 12344,
+            "avg_ride_length_min": 119.59
+        },
+        {
+            "member_casual": "casual",
+            "month": 2,
+            "total_rides": 14907,
+            "avg_ride_length_min": 135.87
+        },
+        {
+            "member_casual": "casual",
+            "month": 3,
+            "total_rides": 40441,
+            "avg_ride_length_min": 63.71
+        },
+        {
+            "member_casual": "member",
+            "month": 1,
+            "total_rides": 233562,
+            "avg_ride_length_min": 13.11
+        },
+        {
+            "member_casual": "member",
+            "month": 2,
+            "total_rides": 218960,
+            "avg_ride_length_min": 13.14
+        },
+        {
+            "member_casual": "member",
+            "month": 3,
+            "total_rides": 264071,
+            "avg_ride_length_min": 13.66
+        }
+    ],
+    "long_trips": [
+        {
+            "member_casual": "casual",
+            "total_rides_over_3h": 1366,
+            "percent_of_user_rides": 2.018
+        },
+        {
+            "member_casual": "member",
+            "total_rides_over_3h": 767,
+            "percent_of_user_rides": 0.107
+        }
+    ]
+}
