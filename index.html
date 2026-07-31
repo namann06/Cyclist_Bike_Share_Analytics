@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyclistic Bike-Share Analytics Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="app-container">
+        <!-- Sidebar / Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <div class="logo-icon">🚲</div>
+                <div class="logo-text">
+                    <h1>Cyclistic</h1>
+                    <span>BIKE-SHARE ANALYSIS</span>
+                </div>
+            </div>
+            <p class="header-desc">Understanding member vs. casual usage patterns to drive growth.</p>
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-tab="ask">1. Ask (Business Task)</button>
+                <button class="tab-btn" data-tab="prepare">2. Prepare & Process</button>
+                <button class="tab-btn" data-tab="sql-eda">3. SQL EDA</button>
+                <button class="tab-btn" data-tab="static-plots">4. Python Visuals</button>
+                <button class="tab-btn" data-tab="dashboard">5. Interactive Charts</button>
+                <button class="tab-btn" data-tab="act">6. Act (Recommendations)</button>
+            </nav>
+            <div class="header-footer">
+                <p>Google Data Analytics Capstone</p>
+                <p class="author">Prepared for Lily Moreno & Executive Team</p>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- TAB: ASK -->
+            <section id="tab-ask" class="tab-content active">
+                <div class="section-card hero-card">
+                    <h2>The Ask: Business Challenge</h2>
+                    <p class="subtitle">How do annual members and casual riders use Cyclistic bikes differently?</p>
+                    <div class="divider"></div>
+                    <p>
+                        Cyclistic’s director of marketing, Lily Moreno, believes the company's future success depends on maximizing the number of annual memberships. Finance analysts have concluded that annual members are significantly more profitable than casual riders. Rather than targeting new customers, the marketing team aims to design strategies to convert existing casual riders into annual members.
+                    </p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="section-card border-glow-blue">
+                        <h3>Three Guiding Questions</h3>
+                        <ol class="styled-list">
+                            <li><strong>How do annual members and casual riders use Cyclistic bikes differently?</strong> <span class="badge badge-accent">Completed</span></li>
+                            <li><strong>Why would casual riders buy Cyclistic annual memberships?</strong> <span class="badge badge-accent">Completed</span></li>
+                            <li><strong>How can Cyclistic use digital media to influence casual riders to become members?</strong> <span class="badge badge-accent">Completed</span></li>
+                        </ol>
+                    </div>
+                    <div class="section-card border-glow-teal">
+                        <h3>Key Deliverables</h3>
+                        <ul class="styled-list checklist">
+                            <li><span class="check-icon">✓</span> A clear statement of the business task</li>
+                            <li><span class="check-icon">✓</span> A description of all data sources used</li>
+                            <li><span class="check-icon">✓</span> Documentation of cleaning and manipulation</li>
+                            <li><span class="check-icon">✓</span> A detailed summary of the analysis</li>
+                            <li><span class="check-icon">✓</span> Supporting visualizations and findings</li>
+                            <li><span class="check-icon">✓</span> Top three actionable recommendations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-card statement-card">
+                    <h3>Business Task Statement</h3>
+                    <p class="quote">
+                        "Analyze Cyclistic's historical bike trip data to identify and understand the distinct behavioral patterns of annual members and casual riders. These data-driven insights will be utilized to formulate targeted marketing campaigns and product modifications designed to convert casual riders into high-value annual members."
+                    </p>
+                </div>
+            </section>
+
+            <!-- TAB: PREPARE & PROCESS -->
+            <section id="tab-prepare" class="tab-content">
+                <div class="section-card">
+                    <h2>Data Sources & Integrity</h2>
+                    <p>We analyzed historical trip data spanning **Q1 2019** and **Q1 2020** consisting of <strong>784,285 cleaned trips</strong>. The data has been made available by Motivate International Inc. under an open data license.</p>
+                    
+                    <div class="data-source-table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Dataset Name</th>
+                                    <th>Total Raw Rows</th>
+                                    <th>Cleaned Rows</th>
+                                    <th>Role in Analysis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Divvy_Trips_2019_Q1</strong></td>
+                                    <td>365,069</td>
+                                    <td>365,069</td>
+                                    <td>Baseline winter/spring usage patterns under the old schema.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Divvy_Trips_2020_Q1</strong></td>
+                                    <td>426,887</td>
+                                    <td>419,216</td>
+                                    <td>Recent usage trends under the standardized, modernized schema.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <strong>Data Privacy Note:</strong> Personally Identifiable Information (PII) is omitted. We cannot connect pass purchases to credit cards to determine geographic residency or calculate individual repeat purchases.
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h2>Process: Data Cleaning & Standardizations</h2>
+                    <p>To prepare the datasets for a combined SQL analysis, we executed a Python cleaning pipeline performing the following actions:</p>
+                    <div class="grid-2 gap-small">
+                        <div class="process-step">
+                            <div class="step-num">1</div>
+                            <h4>Column Schema Standardization</h4>
+                            <p>Renamed all 2019 Q1 columns to match the 2020 Q1 naming convention (e.g. <code>trip_id</code> &rarr; <code>ride_id</code>, <code>usertype</code> &rarr; <code>member_casual</code>, <code>start_time</code> &rarr; <code>started_at</code>).</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-num">2</div>
+                            <h4>User Type Value Mapping</h4>
+                            <p>Mapped 2019's <code>Subscriber</code> value to <code>member</code> and <code>Customer</code> to <code>casual</code> to make user segments consistent across both quarters.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-num">3</div>
+                            <h4>Calculated Fields Created</h4>
+                            <p>Calculated <code>ride_length</code> in seconds (ended_at minus started_at). Extracted <code>day_of_week</code> (Excel format: 1=Sunday, 7=Saturday), <code>hour_of_day</code> (0-23), and <code>month</code>.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-num">4</div>
+                            <h4>Filtering & Outlier Removal</h4>
+                            <p>Filtered out 7,671 records from 2020 Q1 where <code>ride_length</code> was negative or less than 60 seconds (trips below 1 minute are commonly tests or dock errors).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: SQL EDA -->
+            <section id="tab-sql-eda" class="tab-content">
+                <div class="section-card">
+                    <h2>Exploratory Data Analysis via SQL</h2>
+                    <p>We loaded the consolidated dataset into a SQLite database and queried it using SQL to isolate key behaviors.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="section-card">
+                        <h3>SQL Query: Ride Volumes</h3>
+                        <p class="sql-code">SELECT member_casual, COUNT(*) FROM trips GROUP BY member_casual;</p>
+                        <table class="data-table small-table">
+                            <thead>
+                                <tr>
+                                    <th>User Type</th>
+                                    <th>Total Trips</th>
+                                    <th>Share (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="dot casual-dot"></span>Casual</td>
+                                    <td>67,692</td>
+                                    <td>8.63%</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="dot member-dot"></span>Member</td>
+                                    <td>716,593</td>
+                                    <td>91.37%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section-card">
+                        <h3>SQL Query: Avg Duration</h3>
+                        <p class="sql-code">SELECT member_casual, AVG(ride_length)/60.0 FROM trips GROUP BY member_casual;</p>
+                        <table class="data-table small-table">
+                            <thead>
+                                <tr>
+                                    <th>User Type</th>
+                                    <th>Min Ride</th>
+                                    <th>Max Ride</th>
+                                    <th>Avg Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="dot casual-dot"></span>Casual</td>
+                                    <td>1.02 min</td>
+                                    <td>177,200 min</td>
+                                    <td class="text-accent text-bold">89.79 min</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="dot member-dot"></span>Member</td>
+                                    <td>1.00 min</td>
+                                    <td>101,607 min</td>
+                                    <td class="text-blue text-bold">13.32 min</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="section-card">
+                        <h3>Top 5 Casual Start Stations</h3>
+                        <table class="data-table small-table" id="table-casual-stations">
+                            <thead>
+                                <tr>
+                                    <th>Station Name</th>
+                                    <th>Trip Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Loaded dynamically or hardcoded for speed -->
+                                <tr><td>Streeter Dr & Grand Ave</td><td>2,741</td></tr>
+                                <tr><td>Lake Shore Dr & Monroe St</td><td>2,731</td></tr>
+                                <tr><td>Shedd Aquarium</td><td>1,829</td></tr>
+                                <tr><td>Millennium Park</td><td>1,404</td></tr>
+                                <tr><td>Michigan Ave & Oak St</td><td>1,015</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section-card">
+                        <h3>Top 5 Member Start Stations</h3>
+                        <table class="data-table small-table" id="table-member-stations">
+                            <thead>
+                                <tr>
+                                    <th>Station Name</th>
+                                    <th>Trip Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Canal St & Adams St</td><td>13,754</td></tr>
+                                <tr><td>Clinton St & Washington Blvd</td><td>13,392</td></tr>
+                                <tr><td>Clinton St & Madison St</td><td>12,838</td></tr>
+                                <tr><td>Kingsbury St & Kinzie St</td><td>8,687</td></tr>
+                                <tr><td>Columbus Dr & Randolph St</td><td>8,467</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="section-card">
+                        <h3>Query 8: Monthly Activity (Seasonality)</h3>
+                        <p class="sql-code">SELECT member_casual, month, COUNT(*), AVG(ride_length) FROM trips GROUP BY member_casual, month;</p>
+                        <table class="data-table small-table">
+                            <thead>
+                                <tr>
+                                    <th>User Type</th>
+                                    <th>Month</th>
+                                    <th>Total Rides</th>
+                                    <th>Avg Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Casual</td>
+                                    <td>January</td>
+                                    <td>12,344</td>
+                                    <td>119.59 min</td>
+                                </tr>
+                                <tr>
+                                    <td>Casual</td>
+                                    <td>February</td>
+                                    <td>14,907</td>
+                                    <td>135.87 min</td>
+                                </tr>
+                                <tr>
+                                    <td>Casual</td>
+                                    <td>March</td>
+                                    <td class="text-accent text-bold">40,441</td>
+                                    <td>63.71 min</td>
+                                </tr>
+                                <tr>
+                                    <td>Member</td>
+                                    <td>January</td>
+                                    <td>233,562</td>
+                                    <td>13.11 min</td>
+                                </tr>
+                                <tr>
+                                    <td>Member</td>
+                                    <td>February</td>
+                                    <td>218,960</td>
+                                    <td>13.14 min</td>
+                                </tr>
+                                <tr>
+                                    <td>Member</td>
+                                    <td>March</td>
+                                    <td>264,071</td>
+                                    <td>13.66 min</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section-card">
+                        <h3>Query 9: Trips Over 3 Hours (Outliers)</h3>
+                        <p class="sql-code">SELECT member_casual, COUNT(*) FROM trips WHERE ride_length > 10800 GROUP BY member_casual;</p>
+                        <table class="data-table small-table">
+                            <thead>
+                                <tr>
+                                    <th>User Type</th>
+                                    <th>Trips > 3 Hours</th>
+                                    <th>Share of User Rides (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Casual</td>
+                                    <td class="text-accent text-bold">1,366</td>
+                                    <td class="text-accent text-bold">2.018%</td>
+                                </tr>
+                                <tr>
+                                    <td>Member</td>
+                                    <td>767</td>
+                                    <td>0.107%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="alert alert-info" style="margin-top: 1rem; padding: 0.8rem; font-size: 0.8rem; margin-bottom: 0;">
+                            <strong>Insight:</strong> Casual riders are **20 times more likely** to take extremely long trips (>3h) than members, which represents a massive cost-saving selling point for annual subscriptions.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: STATIC PLOTS -->
+            <section id="tab-static-plots" class="tab-content">
+                <div class="section-card">
+                    <h2>Python Visualization Results (Seaborn / Matplotlib)</h2>
+                    <p>These static plots were generated in Python from our SQLite queries to visually demonstrate our core analytical findings.</p>
+                </div>
+
+                <div class="plots-gallery">
+                    <!-- Carousel / Grid -->
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="plots/ride_count_shares.png" alt="Ride Count Share">
+                            <div class="item-desc">
+                                <h4>Total Rides Distribution</h4>
+                                <p>Shows that annual members represent the overwhelming majority of rides in Q1 (~91.4%).</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="plots/avg_ride_duration.png" alt="Average Duration">
+                            <div class="item-desc">
+                                <h4>Average Ride Length</h4>
+                                <p>Highlighting that casual riders stay out significantly longer (89.8 mins) on average compared to members (13.3 mins).</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="plots/weekly_ride_trends.png" alt="Weekly Activity">
+                            <div class="item-desc">
+                                <h4>Weekly Ride Volumes</h4>
+                                <p>Members peak during weekdays (commute routine), whereas casual riders ride mostly on weekends.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="plots/hourly_ride_trends.png" alt="Hourly Activity">
+                            <div class="item-desc">
+                                <h4>Hourly Ride Distribution</h4>
+                                <p>Members show clear peak commute spikes at 8 AM and 5 PM. Casual riders exhibit a single smooth curve peak in early afternoon.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="plots/top_casual_stations.png" alt="Top Casual Stations">
+                            <div class="item-desc">
+                                <h4>Recreational Hotspots</h4>
+                                <p>Top stations for casual riders are clustered around tourist, park, and lakefront locations.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="plots/monthly_ride_trends.png" alt="Monthly Seasonality">
+                            <div class="item-desc">
+                                <h4>Q1 Seasonality Trends</h4>
+                                <p>Casual trips surge by 170% in March as spring begins, while member trips remain highly stable throughout the quarter.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: INTERACTIVE DASHBOARD -->
+            <section id="tab-dashboard" class="tab-content">
+                <div class="section-card">
+                    <h2>Interactive Analytics Dashboard</h2>
+                    <p>Explore the data interactively using the Chart.js widgets below. Hover over datapoints to see precise values.</p>
+                </div>
+
+                <!-- Stat Summary Row -->
+                <div class="stats-row">
+                    <div class="stat-card border-glow-blue">
+                        <span class="stat-label">Total Analyzed Trips</span>
+                        <span class="stat-value" id="stat-total">784,285</span>
+                    </div>
+                    <div class="stat-card border-glow-teal">
+                        <span class="stat-label">Casual Trips Share</span>
+                        <span class="stat-value" id="stat-casual">67,692 (8.6%)</span>
+                    </div>
+                    <div class="stat-card border-glow-blue">
+                        <span class="stat-label">Avg Member Duration</span>
+                        <span class="stat-value" id="stat-member-duration">13.3 min</span>
+                    </div>
+                    <div class="stat-card border-glow-teal">
+                        <span class="stat-label">Avg Casual Duration</span>
+                        <span class="stat-value" id="stat-casual-duration">89.8 min</span>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="chart-card">
+                        <h3>Trips by User Type</h3>
+                        <div class="chart-container">
+                            <canvas id="chart-user-type"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Average Ride Duration (Minutes)</h3>
+                        <div class="chart-container">
+                            <canvas id="chart-avg-duration"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Weekly Activity Patterns (Total Rides)</h3>
+                    <div class="chart-container-large">
+                        <canvas id="chart-weekly"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Hourly Activity Spikes (Commute Peaks vs. Leisure Curves)</h3>
+                    <div class="chart-container-large">
+                        <canvas id="chart-hourly"></canvas>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="chart-card">
+                        <h3>Top 10 Casual Start Stations</h3>
+                        <div class="chart-container">
+                            <canvas id="chart-stations-casual"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Top 10 Member Start Stations</h3>
+                        <div class="chart-container">
+                            <canvas id="chart-stations-member"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Monthly Activity Trends (Q1 Seasonality)</h3>
+                    <div class="chart-container-large">
+                        <canvas id="chart-monthly-trends"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: ACT -->
+            <section id="tab-act" class="tab-content">
+                <div class="section-card hero-card">
+                    <h2>Act: Recommendations & Answers</h2>
+                    <p class="subtitle">Guiding the future marketing program of Cyclistic</p>
+                    <div class="divider"></div>
+                    <p>
+                        We have synthesized our SQL analysis and visualizations to answer the three guiding questions assigned by Moreno.
+                    </p>
+                </div>
+
+                <!-- Three Questions Grid -->
+                <div class="section-card border-glow-blue">
+                    <h3 style="color: #00b4d8; text-transform: uppercase; letter-spacing: 1px; font-size: 1.1rem; margin-bottom: 1.5rem;">Core Answers to Case Study Questions</h3>
+                    
+                    <div class="qa-item" style="margin-bottom: 2rem;">
+                        <h4 style="color: #fff; margin-bottom: 0.5rem;"><span style="color: #00df9a;">Q1.</span> How do annual members and casual riders use Cyclistic bikes differently?</h4>
+                        <p style="font-size: 0.95rem; line-height: 1.5; color: #cbd5e1; margin-left: 1.5rem; margin-bottom: 0;">
+                            <strong>Members:</strong> Use the system for commuting and utility. They show sharp spikes at 8 AM and 5 PM on weekdays. Their trip durations are short and highly consistent (average 13.3 mins), showing they travel directly from point A to B. Their volumes remain stable across months regardless of weather.
+                            <br><br>
+                            <strong>Casuals:</strong> Use the system for recreation, leisure, and fitness. Their usage peaks heavily on weekends (Saturday/Sunday) and during midday (12 PM - 3 PM). Their trip durations are extremely long (average 89.8 mins), and their volumes are highly weather-dependent, surging by 170% from February to March.
+                        </p>
+                    </div>
+
+                    <div class="qa-item" style="margin-bottom: 2rem;">
+                        <h4 style="color: #fff; margin-bottom: 0.5rem;"><span style="color: #00df9a;">Q2.</span> Why would casual riders buy Cyclistic annual memberships?</h4>
+                        <p style="font-size: 0.95rem; line-height: 1.5; color: #cbd5e1; margin-left: 1.5rem; margin-bottom: 0;">
+                            <strong>Cost Savings for Long Rides:</strong> Since casual riders take extremely long trips (averaging nearly 90 minutes, with 2% exceeding 3 hours), they accumulate substantial costs under a single-ride or day-pass pricing model. An annual membership provides unlimited 45-minute rides, offering massive financial savings for repeat users.
+                            <br><br>
+                            <strong>Spring/Summer Habitualization:</strong> As casual riders start riding frequently in March (averaging over 40,000 trips), showing them that a subscription lowers the cost of their daily/weekly exercise encourages conversion into a habit.
+                        </p>
+                    </div>
+
+                    <div class="qa-item">
+                        <h4 style="color: #fff; margin-bottom: 0.5rem;"><span style="color: #00df9a;">Q3.</span> How can Cyclistic use digital media to influence casual riders to become members?</h4>
+                        <p style="font-size: 0.95rem; line-height: 1.5; color: #cbd5e1; margin-left: 1.5rem; margin-bottom: 0;">
+                            <strong>Geofenced Time-Targeted Ads:</strong> Serve mobile ads (Instagram/Facebook) near top recreational stations (*Streeter Dr & Grand Ave*, *Shedd Aquarium*, *Millennium Park*) on weekends between 10 AM and 4 PM when casual density is highest.
+                            <br><br>
+                            <strong>Triggered Email Cost-Comparisons:</strong> Utilize email data captured during single-pass purchases to send automated cost-summary reports showing: *"You rode for X hours last month and spent $Y. If you were an annual member, you would have spent only $Z!"*
+                            <br><br>
+                            <strong>Seasonal Promotion Campaign:</strong> Launch a digital "Spring Into Gear" campaign in early March (matching the casual ridership surge) highlighting the health, community, and economic benefits of annual memberships.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 style="margin-bottom: 1.5rem;">Top 3 Actionable Recommendations for Lily Moreno</h3>
+                    <div class="recommendations-container">
+                        <div class="rec-card card-glow-teal">
+                            <div class="rec-header">
+                                <span class="rec-num">1</span>
+                                <h3>Targeted On-Station & Geofenced Digital Ads</h3>
+                            </div>
+                            <p>
+                                Deploy interactive digital kiosk ads and QR codes at the top 10 casual start stations (*Streeter Dr & Grand Ave*, *Lake Shore Dr & Monroe St*, *Shedd Aquarium*). Pair this with hyper-local geofenced ads on social media targeting casual riders physically unlocking bikes at these recreational hotspots during weekend afternoon peaks.
+                            </p>
+                        </div>
+
+                        <div class="rec-card card-glow-blue">
+                            <div class="rec-header">
+                                <span class="rec-num">2</span>
+                                <h3>Personalized "Cost-Benefit" Email Campaigns</h3>
+                                <span class="badge badge-accent">Highly Effective</span>
+                            </div>
+                            <p>
+                                Leverage single-pass transactional data to trigger automated email campaigns for casual riders who have ridden more than 3 times in a month or had a single ride exceeding 60 minutes. Provide a visual cost comparison breakdown showing how much they would save by upgrading to an annual membership, with an easy one-click upgrade button.
+                            </p>
+                        </div>
+
+                        <div class="rec-card card-glow-teal">
+                            <div class="rec-header">
+                                <span class="rec-num">3</span>
+                                <h3>Introduce a "Weekend Warrior" or "Seasonal" Pass</h3>
+                            </div>
+                            <p>
+                                Since casuals use the system heavily for weekend leisure, design a "Weekend Warrior Pass" (unlimited weekend rides) or a "Summer Season Pass" as transitional subscription tiers. These passes gather recurring billing details and customer emails, acting as high-conversion pipelines to upsell to full annual memberships.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
